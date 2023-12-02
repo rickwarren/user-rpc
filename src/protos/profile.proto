@@ -1,0 +1,98 @@
+syntax = "proto3";
+
+import "google/protobuf/timestamp.proto";
+
+service ProfileProto {
+  rpc getProfiles(EmptyProfile) returns (GetProfileResponseDto);
+  rpc getProfile(OwnerId) returns (Profile);
+  rpc createProfile(CreateProfileDto) returns (Profile);
+  rpc updateProfile(UpdateProfileDto) returns (Profile);
+  rpc deleteProfile(ProfileId) returns (DeleteProfileResponseDto);
+} 
+
+message GetProfileResponseDto {
+  repeated Profile profiles = 1;
+}
+
+message DeleteProfileResponseDto {
+  bool success = 1;
+}
+
+message OwnerId {
+  int32 id = 1;
+}
+
+message EmptyProfile {}
+
+message ProfileId {
+  int32 id = 1;
+}
+
+message UpdateProfileDto {
+    int32 id = 1;
+    int32 ownerId = 2;
+    string firstName = 3;
+    string lastName = 4;
+    string dateOfBirth = 5;
+    string profession = 6;
+    string employer = 7;
+    string dateHired = 8;
+    string employmentStatus = 9;
+    string relationshipStatus = 10;
+    string profilePhoto = 11;
+    string bannerImage = 12;
+    string hometown = 13;
+    string city = 14;
+    string province = 15;
+    string country = 16;
+    string language = 17;
+    string mobilePhone = 18;
+    string visibility = 19;
+    google.protobuf.Timestamp createdAt = 20;
+    google.protobuf.Timestamp updatedAt = 21;
+  }
+
+message CreateProfileDto {
+    int32 ownerId = 1;
+    string firstName = 2;
+    string lastName = 3;
+    string dateOfBirth = 4;
+    string profession = 5;
+    string employer = 6;
+    string dateHired = 7;
+    string employmentStatus = 8;
+    string relationshipStatus = 9;
+    string profilePhoto = 10;
+    string bannerImage = 11;
+    string hometown = 12;
+    string city = 13;
+    string province = 14;
+    string country = 15;
+    string language = 16;
+    string mobilePhone = 17;
+    string visibility = 18;
+}
+
+message Profile {
+    int32 id = 1;
+    int32 ownerId = 2;
+    string firstName = 3;
+    string lastName = 4;
+    string dateOfBirth = 5;
+    string profession = 6;
+    string employer = 7;
+    string dateHired = 8;
+    string employmentStatus = 9;
+    string relationshipStatus = 10;
+    string profilePhoto = 11;
+    string bannerImage = 12;
+    string hometown = 13;
+    string city = 14;
+    string province = 15;
+    string country = 16;
+    string language = 17;
+    string mobilePhone = 18;
+    string visibility = 19;
+    google.protobuf.Timestamp createdAt = 20;
+    google.protobuf.Timestamp updatedAt = 21;
+  }
