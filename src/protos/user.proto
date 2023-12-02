@@ -1,0 +1,79 @@
+syntax = "proto3";
+
+import "google/protobuf/timestamp.proto";
+
+service UserProto {
+  rpc getUsers(EmptyUser) returns (GetUsersResponseDto);
+  rpc getUser(UserId) returns (User);
+  rpc getUserByEmail(UserByEmailDto) returns (User);
+  rpc createUser(CreateUserDto) returns (User);
+  rpc updateUser(UpdateUserDto) returns (User);
+  rpc deleteUser(UserId) returns (DeleteUserResponseDto);
+}
+
+message UserByEmailDto {
+  string email = 1;
+}
+
+message GetUsersResponseDto {
+  repeated User users = 1;
+}
+
+message DeleteUserResponseDto {
+  bool success = 1;
+}
+
+message EmptyUser {}
+
+message UserId {
+  int32 id = 1;
+}
+
+message UpdateUserDto {
+    int32 id = 1;
+    string email = 2;
+    string password = 3;
+    string role = 4;
+    ProfileDto profile = 5;
+    google.protobuf.Timestamp created_at = 6;
+    google.protobuf.Timestamp updated_at = 7;
+}
+
+message CreateUserDto {
+    string email = 1;
+    string password = 2;
+}
+
+message User {
+  int32 id = 1;
+  string email = 2;
+  string password = 3;
+  string role = 4;
+  ProfileDto profile = 5;
+  google.protobuf.Timestamp created_at = 6;
+  google.protobuf.Timestamp updated_at = 7;
+}
+
+message ProfileDto {
+  int32 id = 1;
+  int32 ownerId = 2;
+  string firstName = 3;
+  string lastName = 4;
+  string dateOfBirth = 5;
+  string profession = 6;
+  string employer = 7;
+  string dateHired = 8;
+  string employmentStatus = 9;
+  string relationshipStatus = 10;
+  string profilePhoto = 11;
+  string bannerImage = 12;
+  string hometown = 13;
+  string city = 14;
+  string province = 15;
+  string country = 16;
+  string language = 17;
+  string mobilePhone = 18;
+  string visibility = 19;
+  google.protobuf.Timestamp createdAt = 20;
+  google.protobuf.Timestamp updatedAt = 21;
+}
