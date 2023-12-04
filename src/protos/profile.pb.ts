@@ -24,18 +24,18 @@ export interface DeleteProfileResponseDto {
 }
 
 export interface OwnerId {
-  id: number;
+  id: string;
 }
 
 export interface EmptyProfile {}
 
 export interface ProfileId {
-  id: number;
+  id: string;
 }
 
 export interface UpdateProfileDto {
-  id: number;
-  ownerId: number;
+  id: string;
+  ownerId: string;
   firstName: string;
   lastName: string;
   dateOfBirth: string;
@@ -58,7 +58,7 @@ export interface UpdateProfileDto {
 }
 
 export interface CreateProfileDto {
-  ownerId: number;
+  ownerId: string;
   firstName: string;
   lastName: string;
   dateOfBirth: string;
@@ -79,8 +79,8 @@ export interface CreateProfileDto {
 }
 
 export interface Profile {
-  id: number;
-  ownerId: number;
+  id: string;
+  ownerId: string;
   firstName: string;
   lastName: string;
   dateOfBirth: string;
@@ -477,7 +477,7 @@ export const OwnerId = {
    */
   initialize: function (msg?: Partial<OwnerId>): OwnerId {
     return {
-      id: 0,
+      id: "",
       ...msg,
     };
   },
@@ -490,7 +490,7 @@ export const OwnerId = {
     writer: protoscript.BinaryWriter,
   ): protoscript.BinaryWriter {
     if (msg.id) {
-      writer.writeInt32(1, msg.id);
+      writer.writeString(1, msg.id);
     }
     return writer;
   },
@@ -506,7 +506,7 @@ export const OwnerId = {
       const field = reader.getFieldNumber();
       switch (field) {
         case 1: {
-          msg.id = reader.readInt32();
+          msg.id = reader.readString();
           break;
         }
         default: {
@@ -590,7 +590,7 @@ export const ProfileId = {
    */
   initialize: function (msg?: Partial<ProfileId>): ProfileId {
     return {
-      id: 0,
+      id: "",
       ...msg,
     };
   },
@@ -603,7 +603,7 @@ export const ProfileId = {
     writer: protoscript.BinaryWriter,
   ): protoscript.BinaryWriter {
     if (msg.id) {
-      writer.writeInt32(1, msg.id);
+      writer.writeString(1, msg.id);
     }
     return writer;
   },
@@ -619,7 +619,7 @@ export const ProfileId = {
       const field = reader.getFieldNumber();
       switch (field) {
         case 1: {
-          msg.id = reader.readInt32();
+          msg.id = reader.readString();
           break;
         }
         default: {
@@ -658,8 +658,8 @@ export const UpdateProfileDto = {
    */
   initialize: function (msg?: Partial<UpdateProfileDto>): UpdateProfileDto {
     return {
-      id: 0,
-      ownerId: 0,
+      id: "",
+      ownerId: "",
       firstName: "",
       lastName: "",
       dateOfBirth: "",
@@ -691,10 +691,10 @@ export const UpdateProfileDto = {
     writer: protoscript.BinaryWriter,
   ): protoscript.BinaryWriter {
     if (msg.id) {
-      writer.writeInt32(1, msg.id);
+      writer.writeString(1, msg.id);
     }
     if (msg.ownerId) {
-      writer.writeInt32(2, msg.ownerId);
+      writer.writeString(2, msg.ownerId);
     }
     if (msg.firstName) {
       writer.writeString(3, msg.firstName);
@@ -775,11 +775,11 @@ export const UpdateProfileDto = {
       const field = reader.getFieldNumber();
       switch (field) {
         case 1: {
-          msg.id = reader.readInt32();
+          msg.id = reader.readString();
           break;
         }
         case 2: {
-          msg.ownerId = reader.readInt32();
+          msg.ownerId = reader.readString();
           break;
         }
         case 3: {
@@ -894,7 +894,7 @@ export const CreateProfileDto = {
    */
   initialize: function (msg?: Partial<CreateProfileDto>): CreateProfileDto {
     return {
-      ownerId: 0,
+      ownerId: "",
       firstName: "",
       lastName: "",
       dateOfBirth: "",
@@ -924,7 +924,7 @@ export const CreateProfileDto = {
     writer: protoscript.BinaryWriter,
   ): protoscript.BinaryWriter {
     if (msg.ownerId) {
-      writer.writeInt32(1, msg.ownerId);
+      writer.writeString(1, msg.ownerId);
     }
     if (msg.firstName) {
       writer.writeString(2, msg.firstName);
@@ -991,7 +991,7 @@ export const CreateProfileDto = {
       const field = reader.getFieldNumber();
       switch (field) {
         case 1: {
-          msg.ownerId = reader.readInt32();
+          msg.ownerId = reader.readString();
           break;
         }
         case 2: {
@@ -1098,8 +1098,8 @@ export const Profile = {
    */
   initialize: function (msg?: Partial<Profile>): Profile {
     return {
-      id: 0,
-      ownerId: 0,
+      id: "",
+      ownerId: "",
       firstName: "",
       lastName: "",
       dateOfBirth: "",
@@ -1131,10 +1131,10 @@ export const Profile = {
     writer: protoscript.BinaryWriter,
   ): protoscript.BinaryWriter {
     if (msg.id) {
-      writer.writeInt32(1, msg.id);
+      writer.writeString(1, msg.id);
     }
     if (msg.ownerId) {
-      writer.writeInt32(2, msg.ownerId);
+      writer.writeString(2, msg.ownerId);
     }
     if (msg.firstName) {
       writer.writeString(3, msg.firstName);
@@ -1215,11 +1215,11 @@ export const Profile = {
       const field = reader.getFieldNumber();
       switch (field) {
         case 1: {
-          msg.id = reader.readInt32();
+          msg.id = reader.readString();
           break;
         }
         case 2: {
-          msg.ownerId = reader.readInt32();
+          msg.ownerId = reader.readString();
           break;
         }
         case 3: {
@@ -1452,7 +1452,7 @@ export const OwnerIdJSON = {
    */
   initialize: function (msg?: Partial<OwnerId>): OwnerId {
     return {
-      id: 0,
+      id: "",
       ...msg,
     };
   },
@@ -1474,7 +1474,7 @@ export const OwnerIdJSON = {
   _readMessage: function (msg: OwnerId, json: any): OwnerId {
     const _id_ = json["id"];
     if (_id_) {
-      msg.id = protoscript.parseNumber(_id_);
+      msg.id = _id_;
     }
     return msg;
   },
@@ -1544,7 +1544,7 @@ export const ProfileIdJSON = {
    */
   initialize: function (msg?: Partial<ProfileId>): ProfileId {
     return {
-      id: 0,
+      id: "",
       ...msg,
     };
   },
@@ -1568,7 +1568,7 @@ export const ProfileIdJSON = {
   _readMessage: function (msg: ProfileId, json: any): ProfileId {
     const _id_ = json["id"];
     if (_id_) {
-      msg.id = protoscript.parseNumber(_id_);
+      msg.id = _id_;
     }
     return msg;
   },
@@ -1597,8 +1597,8 @@ export const UpdateProfileDtoJSON = {
    */
   initialize: function (msg?: Partial<UpdateProfileDto>): UpdateProfileDto {
     return {
-      id: 0,
-      ownerId: 0,
+      id: "",
+      ownerId: "",
       firstName: "",
       lastName: "",
       dateOfBirth: "",
@@ -1701,11 +1701,11 @@ export const UpdateProfileDtoJSON = {
   _readMessage: function (msg: UpdateProfileDto, json: any): UpdateProfileDto {
     const _id_ = json["id"];
     if (_id_) {
-      msg.id = protoscript.parseNumber(_id_);
+      msg.id = _id_;
     }
     const _ownerId_ = json["ownerId"];
     if (_ownerId_) {
-      msg.ownerId = protoscript.parseNumber(_ownerId_);
+      msg.ownerId = _ownerId_;
     }
     const _firstName_ = json["firstName"];
     if (_firstName_) {
@@ -1810,7 +1810,7 @@ export const CreateProfileDtoJSON = {
    */
   initialize: function (msg?: Partial<CreateProfileDto>): CreateProfileDto {
     return {
-      ownerId: 0,
+      ownerId: "",
       firstName: "",
       lastName: "",
       dateOfBirth: "",
@@ -1902,7 +1902,7 @@ export const CreateProfileDtoJSON = {
   _readMessage: function (msg: CreateProfileDto, json: any): CreateProfileDto {
     const _ownerId_ = json["ownerId"];
     if (_ownerId_) {
-      msg.ownerId = protoscript.parseNumber(_ownerId_);
+      msg.ownerId = _ownerId_;
     }
     const _firstName_ = json["firstName"];
     if (_firstName_) {
@@ -1996,8 +1996,8 @@ export const ProfileJSON = {
    */
   initialize: function (msg?: Partial<Profile>): Profile {
     return {
-      id: 0,
-      ownerId: 0,
+      id: "",
+      ownerId: "",
       firstName: "",
       lastName: "",
       dateOfBirth: "",
@@ -2098,11 +2098,11 @@ export const ProfileJSON = {
   _readMessage: function (msg: Profile, json: any): Profile {
     const _id_ = json["id"];
     if (_id_) {
-      msg.id = protoscript.parseNumber(_id_);
+      msg.id = _id_;
     }
     const _ownerId_ = json["ownerId"];
     if (_ownerId_) {
-      msg.ownerId = protoscript.parseNumber(_ownerId_);
+      msg.ownerId = _ownerId_;
     }
     const _firstName_ = json["firstName"];
     if (_firstName_) {

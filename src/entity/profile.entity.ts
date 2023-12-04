@@ -9,60 +9,61 @@ import * as protoscript from "protoscript";
 
 @Entity()
 export class Profile {
-  @PrimaryGeneratedColumn()
-  id: number;
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
 
   @Column()
-  ownerId: number;
+  ownerId: string;
 
   @Column()
   firstName: string;
 
-  @Column()
+  @Column({ nullable: true })
   lastName: string;
 
-  @Column()
+  @Column({ nullable: true })
   dateOfBirth: string;
 
-  @Column()
+  @Column({ nullable: true })
   profession: string;
 
-  @Column()
+  @Column({ nullable: true })
   employer: string;
 
-  @Column()
+  @Column({ nullable: true })
   dateHired: string;
 
-  @Column()
+  @Column({ nullable: true })
   employmentStatus: string;
 
-  @Column()
+  @Column({ nullable: true })
   relationshipStatus: string;
 
-  @Column()
+  @Column({ nullable: true })
   profilePhoto: string;
 
-  @Column()
+  @Column({ nullable: true })
   bannerImage: string;
 
-  @Column()
+  @Column({ nullable: true })
   hometown: string;
 
-  @Column()
+  @Column({ nullable: true })
   city: string;
 
-  @Column()
+  @Column({ nullable: true })
   province: string;
 
-  @Column()
+  @Column({ nullable: true })
   country: string;
 
-  @Column()
+  @Column({ nullable: true })
   language: string;
 
-  @Column()
+  @Column({ nullable: true })
   mobilePhone: string;
 
+  @Column({ nullable: true })
   visibility: string;
 
   @CreateDateColumn({ type: 'timestamptz', default: () => 'CURRENT_TIMESTAMP(6)' })
