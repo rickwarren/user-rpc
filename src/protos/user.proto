@@ -26,11 +26,11 @@ message DeleteUserResponseDto {
 message EmptyUser {}
 
 message UserId {
-  int32 id = 1;
+  string id = 1;
 }
 
 message UpdateUserDto {
-    int32 id = 1;
+    string id = 1;
     string email = 2;
     string password = 3;
     string role = 4;
@@ -45,7 +45,7 @@ message CreateUserDto {
 }
 
 message User {
-  int32 id = 1;
+  string id = 1;
   string email = 2;
   string password = 3;
   string role = 4;
@@ -55,8 +55,8 @@ message User {
 }
 
 message ProfileDto {
-  int32 id = 1;
-  int32 ownerId = 2;
+  string id = 1;
+  string ownerId = 2;
   string firstName = 3;
   string lastName = 4;
   string dateOfBirth = 5;

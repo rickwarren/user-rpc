@@ -30,11 +30,11 @@ export interface DeleteUserResponseDto {
 export interface EmptyUser {}
 
 export interface UserId {
-  id: number;
+  id: string;
 }
 
 export interface UpdateUserDto {
-  id: number;
+  id: string;
   email: string;
   password: string;
   role: string;
@@ -49,7 +49,7 @@ export interface CreateUserDto {
 }
 
 export interface User {
-  id: number;
+  id: string;
   email: string;
   password: string;
   role: string;
@@ -59,8 +59,8 @@ export interface User {
 }
 
 export interface ProfileDto {
-  id: number;
-  ownerId: number;
+  id: string;
+  ownerId: string;
   firstName: string;
   lastName: string;
   dateOfBirth: string;
@@ -597,7 +597,7 @@ export const UserId = {
    */
   initialize: function (msg?: Partial<UserId>): UserId {
     return {
-      id: 0,
+      id: "",
       ...msg,
     };
   },
@@ -610,7 +610,7 @@ export const UserId = {
     writer: protoscript.BinaryWriter,
   ): protoscript.BinaryWriter {
     if (msg.id) {
-      writer.writeInt32(1, msg.id);
+      writer.writeString(1, msg.id);
     }
     return writer;
   },
@@ -626,7 +626,7 @@ export const UserId = {
       const field = reader.getFieldNumber();
       switch (field) {
         case 1: {
-          msg.id = reader.readInt32();
+          msg.id = reader.readString();
           break;
         }
         default: {
@@ -665,7 +665,7 @@ export const UpdateUserDto = {
    */
   initialize: function (msg?: Partial<UpdateUserDto>): UpdateUserDto {
     return {
-      id: 0,
+      id: "",
       email: "",
       password: "",
       role: "",
@@ -684,7 +684,7 @@ export const UpdateUserDto = {
     writer: protoscript.BinaryWriter,
   ): protoscript.BinaryWriter {
     if (msg.id) {
-      writer.writeInt32(1, msg.id);
+      writer.writeString(1, msg.id);
     }
     if (msg.email) {
       writer.writeString(2, msg.email);
@@ -726,7 +726,7 @@ export const UpdateUserDto = {
       const field = reader.getFieldNumber();
       switch (field) {
         case 1: {
-          msg.id = reader.readInt32();
+          msg.id = reader.readString();
           break;
         }
         case 2: {
@@ -865,7 +865,7 @@ export const User = {
    */
   initialize: function (msg?: Partial<User>): User {
     return {
-      id: 0,
+      id: "",
       email: "",
       password: "",
       role: "",
@@ -884,7 +884,7 @@ export const User = {
     writer: protoscript.BinaryWriter,
   ): protoscript.BinaryWriter {
     if (msg.id) {
-      writer.writeInt32(1, msg.id);
+      writer.writeString(1, msg.id);
     }
     if (msg.email) {
       writer.writeString(2, msg.email);
@@ -923,7 +923,7 @@ export const User = {
       const field = reader.getFieldNumber();
       switch (field) {
         case 1: {
-          msg.id = reader.readInt32();
+          msg.id = reader.readString();
           break;
         }
         case 2: {
@@ -986,8 +986,8 @@ export const ProfileDto = {
    */
   initialize: function (msg?: Partial<ProfileDto>): ProfileDto {
     return {
-      id: 0,
-      ownerId: 0,
+      id: "",
+      ownerId: "",
       firstName: "",
       lastName: "",
       dateOfBirth: "",
@@ -1019,10 +1019,10 @@ export const ProfileDto = {
     writer: protoscript.BinaryWriter,
   ): protoscript.BinaryWriter {
     if (msg.id) {
-      writer.writeInt32(1, msg.id);
+      writer.writeString(1, msg.id);
     }
     if (msg.ownerId) {
-      writer.writeInt32(2, msg.ownerId);
+      writer.writeString(2, msg.ownerId);
     }
     if (msg.firstName) {
       writer.writeString(3, msg.firstName);
@@ -1103,11 +1103,11 @@ export const ProfileDto = {
       const field = reader.getFieldNumber();
       switch (field) {
         case 1: {
-          msg.id = reader.readInt32();
+          msg.id = reader.readString();
           break;
         }
         case 2: {
-          msg.ownerId = reader.readInt32();
+          msg.ownerId = reader.readString();
           break;
         }
         case 3: {
@@ -1434,7 +1434,7 @@ export const UserIdJSON = {
    */
   initialize: function (msg?: Partial<UserId>): UserId {
     return {
-      id: 0,
+      id: "",
       ...msg,
     };
   },
@@ -1456,7 +1456,7 @@ export const UserIdJSON = {
   _readMessage: function (msg: UserId, json: any): UserId {
     const _id_ = json["id"];
     if (_id_) {
-      msg.id = protoscript.parseNumber(_id_);
+      msg.id = _id_;
     }
     return msg;
   },
@@ -1485,7 +1485,7 @@ export const UpdateUserDtoJSON = {
    */
   initialize: function (msg?: Partial<UpdateUserDto>): UpdateUserDto {
     return {
-      id: 0,
+      id: "",
       email: "",
       password: "",
       role: "",
@@ -1536,7 +1536,7 @@ export const UpdateUserDtoJSON = {
   _readMessage: function (msg: UpdateUserDto, json: any): UpdateUserDto {
     const _id_ = json["id"];
     if (_id_) {
-      msg.id = protoscript.parseNumber(_id_);
+      msg.id = _id_;
     }
     const _email_ = json["email"];
     if (_email_) {
@@ -1647,7 +1647,7 @@ export const UserJSON = {
    */
   initialize: function (msg?: Partial<User>): User {
     return {
-      id: 0,
+      id: "",
       email: "",
       password: "",
       role: "",
@@ -1696,7 +1696,7 @@ export const UserJSON = {
   _readMessage: function (msg: User, json: any): User {
     const _id_ = json["id"];
     if (_id_) {
-      msg.id = protoscript.parseNumber(_id_);
+      msg.id = _id_;
     }
     const _email_ = json["email"];
     if (_email_) {
@@ -1749,8 +1749,8 @@ export const ProfileDtoJSON = {
    */
   initialize: function (msg?: Partial<ProfileDto>): ProfileDto {
     return {
-      id: 0,
-      ownerId: 0,
+      id: "",
+      ownerId: "",
       firstName: "",
       lastName: "",
       dateOfBirth: "",
@@ -1853,11 +1853,11 @@ export const ProfileDtoJSON = {
   _readMessage: function (msg: ProfileDto, json: any): ProfileDto {
     const _id_ = json["id"];
     if (_id_) {
-      msg.id = protoscript.parseNumber(_id_);
+      msg.id = _id_;
     }
     const _ownerId_ = json["ownerId"];
     if (_ownerId_) {
-      msg.ownerId = protoscript.parseNumber(_ownerId_);
+      msg.ownerId = _ownerId_;
     }
     const _firstName_ = json["firstName"];
     if (_firstName_) {

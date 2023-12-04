@@ -18,8 +18,8 @@ import * as protoscript from "protoscript";
 @Entity()
 @entity.name('user')
 export class User {
-  @PrimaryGeneratedColumn()
-  id: number;
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
 
   @Column({ unique: true })
   email: string;
@@ -29,7 +29,7 @@ export class User {
   password: string;
 
   //@Column({ type: 'enum', enum: UserRole, default: UserRole.USER })
-  @Column()
+  @Column({ nullable: true })
   role: string;
 
   @OneToOne(() => Profile)

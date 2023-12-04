@@ -19,18 +19,18 @@ message DeleteProfileResponseDto {
 }
 
 message OwnerId {
-  int32 id = 1;
+  string id = 1;
 }
 
 message EmptyProfile {}
 
 message ProfileId {
-  int32 id = 1;
+  string id = 1;
 }
 
 message UpdateProfileDto {
-    int32 id = 1;
-    int32 ownerId = 2;
+    string id = 1;
+    string ownerId = 2;
     string firstName = 3;
     string lastName = 4;
     string dateOfBirth = 5;
@@ -53,7 +53,7 @@ message UpdateProfileDto {
   }
 
 message CreateProfileDto {
-    int32 ownerId = 1;
+    string ownerId = 1;
     string firstName = 2;
     string lastName = 3;
     string dateOfBirth = 4;
@@ -74,8 +74,8 @@ message CreateProfileDto {
 }
 
 message Profile {
-    int32 id = 1;
-    int32 ownerId = 2;
+    string id = 1;
+    string ownerId = 2;
     string firstName = 3;
     string lastName = 4;
     string dateOfBirth = 5;

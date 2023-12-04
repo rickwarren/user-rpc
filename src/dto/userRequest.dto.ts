@@ -1,3 +1,3 @@
 export class UserId {
-    id: number;
+    id: string;
 }

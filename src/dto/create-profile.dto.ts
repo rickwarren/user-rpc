@@ -1,7 +1,7 @@
 import { ProfileVisibility } from "../enum/profile-visibility.enum";
 
 export class CreateProfileDto {
-  ownerId: number;
+  ownerId: string;
   firstName: string;
   lastName: string;
   dateOfBirth: string;
