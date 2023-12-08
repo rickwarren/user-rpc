@@ -4,16 +4,17 @@ import {
   CreateDateColumn,
   Entity,
   JoinColumn,
+  OneToMany,
   OneToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
 import * as bcrypt from 'bcryptjs';
 import { Exclude } from 'class-transformer';
-import { UserRole } from '../enum/user-role.enum.ts';
 import { Profile } from './profile.entity.ts';
 import { entity } from '@deepkit/type';
 import * as protoscript from "protoscript";
+import { Permissions } from './permissions.entity.ts';
 
 @Entity()
 @entity.name('user')

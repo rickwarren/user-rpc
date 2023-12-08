@@ -14,6 +14,9 @@ const userProto: UserProto = {
         const AppDataSource = await getDataSource();
         const userRepo = AppDataSource.getRepository(User);
         const users = await userRepo.manager.find(User);
+        if(users.length < 1) {
+            throw Error('Users not found');
+        }
         users.map((user) => {
           delete user.password;
           return user;
@@ -24,18 +27,29 @@ const userProto: UserProto = {
         const AppDataSource = await getDataSource();
         const userRepo = AppDataSource.getRepository(User);
         const user = await userRepo.manager.findOneBy(User, { id: userId.id });
+        if(!user) {
+            throw Error('User not found');
+        }
         delete user.password;
         return user;
     },
-    getUserByEmail: async (email: UserByEmailDto): Promise<UserDto> => {
+    getUserByEmail: async (email: UserByEmailDto): Promise<User> => {
         const AppDataSource = await getDataSource();
         const userRepo = AppDataSource.getRepository(User);
-        return await userRepo.manager.findOneBy(User, { email: email.email });
+        const user = await userRepo.manager.findOneBy(User, { email: email.email });
+        if(!user) {
+            throw Error('User not found');
+        }
+        console.log(user);
+        return user;
     },
     createUser: async (data: CreateUserDto): Promise<UserDto> => {
         const AppDataSource = await getDataSource();
         const userRepo = AppDataSource.getRepository(User);
         const user = await userRepo.manager.save(User, data);
+        if(!user) {
+            throw Error('unable to create user');
+        }
         delete user.password;
         return user;
     },
@@ -47,13 +61,19 @@ const userProto: UserProto = {
             { id: data.id },
             data,
           );
+          if(!user.raw) {
+            throw Error('Unable to save user');
+          }
           delete user.raw.password;
           return user.raw;
     },
     deleteUser: async (userId: UserId): Promise<DeleteUserResponseDto> => {
         const AppDataSource = await getDataSource();
         const userRepo = AppDataSource.getRepository(User);
-        await userRepo.manager.delete(User, { id: userId.id });
+        const result = await userRepo.manager.delete(User, { where: { id: userId.id }});
+        if(!result) {
+            throw Error('Unable to delete user');
+        }
         return { success: true };
     }
   };

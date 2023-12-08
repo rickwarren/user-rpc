@@ -1,0 +1,34 @@
+syntax = "proto3";
+
+import "google/protobuf/timestamp.proto";
+
+service PermissionsProto {
+  rpc getPermissions(PermissionId) returns (GetPermissionsResponseDto);
+  rpc createPermission(CreatePermissionDto) returns (PermissionsDto);
+  rpc deletePermissions(PermissionId) returns (DeletePermissionResponseDto);
+}
+
+message GetPermissionsResponseDto {
+  repeated PermissionsDto permissions = 1;
+}
+
+message DeletePermissionResponseDto {
+  bool success = 1;
+}
+
+message PermissionId {
+  string id = 1;
+}
+
+message CreatePermissionDto {
+  string userId = 1;
+  string permission = 2;
+}
+
+message PermissionsDto {
+  string id = 1;
+  string userId = 2;
+  string permission = 3;
+  google.protobuf.Timestamp created_at = 4;
+  google.protobuf.Timestamp updated_at = 5;
+}

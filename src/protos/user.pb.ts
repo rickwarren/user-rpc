@@ -36,7 +36,6 @@ export interface UserId {
 export interface UpdateUserDto {
   id: string;
   email: string;
-  password: string;
   role: string;
   profile: ProfileDto;
   createdAt: protoscript.Timestamp;
@@ -667,7 +666,6 @@ export const UpdateUserDto = {
     return {
       id: "",
       email: "",
-      password: "",
       role: "",
       profile: ProfileDto.initialize(),
       createdAt: protoscript.Timestamp.initialize(),
@@ -689,25 +687,22 @@ export const UpdateUserDto = {
     if (msg.email) {
       writer.writeString(2, msg.email);
     }
-    if (msg.password) {
-      writer.writeString(3, msg.password);
-    }
     if (msg.role) {
-      writer.writeString(4, msg.role);
+      writer.writeString(3, msg.role);
     }
     if (msg.profile) {
-      writer.writeMessage(5, msg.profile, ProfileDto._writeMessage);
+      writer.writeMessage(4, msg.profile, ProfileDto._writeMessage);
     }
     if (msg.createdAt) {
       writer.writeMessage(
-        6,
+        5,
         msg.createdAt,
         protoscript.Timestamp._writeMessage,
       );
     }
     if (msg.updatedAt) {
       writer.writeMessage(
-        7,
+        6,
         msg.updatedAt,
         protoscript.Timestamp._writeMessage,
       );
@@ -734,22 +729,18 @@ export const UpdateUserDto = {
           break;
         }
         case 3: {
-          msg.password = reader.readString();
-          break;
-        }
-        case 4: {
           msg.role = reader.readString();
           break;
         }
-        case 5: {
+        case 4: {
           reader.readMessage(msg.profile, ProfileDto._readMessage);
           break;
         }
-        case 6: {
+        case 5: {
           reader.readMessage(msg.createdAt, protoscript.Timestamp._readMessage);
           break;
         }
-        case 7: {
+        case 6: {
           reader.readMessage(msg.updatedAt, protoscript.Timestamp._readMessage);
           break;
         }
@@ -1487,7 +1478,6 @@ export const UpdateUserDtoJSON = {
     return {
       id: "",
       email: "",
-      password: "",
       role: "",
       profile: ProfileDtoJSON.initialize(),
       createdAt: protoscript.TimestampJSON.initialize(),
@@ -1508,9 +1498,6 @@ export const UpdateUserDtoJSON = {
     }
     if (msg.email) {
       json["email"] = msg.email;
-    }
-    if (msg.password) {
-      json["password"] = msg.password;
     }
     if (msg.role) {
       json["role"] = msg.role;
@@ -1541,10 +1528,6 @@ export const UpdateUserDtoJSON = {
     const _email_ = json["email"];
     if (_email_) {
       msg.email = _email_;
-    }
-    const _password_ = json["password"];
-    if (_password_) {
-      msg.password = _password_;
     }
     const _role_ = json["role"];
     if (_role_) {

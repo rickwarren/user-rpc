@@ -2,10 +2,11 @@ import { createServer } from "http";
 import { createTwirpServer } from "twirpscript";
 import { userProtoHandler } from "./services/user.service.ts";
 import { profileProtoHandler } from "./services/profile.service.ts";
+import { permissionsProtoHandler } from "./services/permissions.service.ts";
 
 const PORT = 8080;
 
-const app = createTwirpServer([userProtoHandler, profileProtoHandler]);
+const app = createTwirpServer([userProtoHandler, profileProtoHandler, permissionsProtoHandler]);
 
 app.use(async (req, _ctx, next) => {
   if (req.method === "OPTIONS") {

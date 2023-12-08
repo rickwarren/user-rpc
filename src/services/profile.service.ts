@@ -12,30 +12,46 @@ const profileProto: ProfileProto = {
         const AppDataSource = await getDataSource();
         const profileRepo = AppDataSource.getRepository(Profile);
         const profiles = await profileRepo.manager.find(Profile);
+        if(profiles.length < 1) {
+            throw Error('Profiles not found');
+        }
         return { profiles: profiles };
     },
     getProfile: async (userId: UserId): Promise<Profile> => {
         const AppDataSource = await getDataSource();
         const profileRepo = AppDataSource.getRepository(Profile);
-        return await profileRepo.manager.findOneBy(Profile,{ ownerId: userId.id });
+        const profile = await profileRepo.manager.findOneBy(Profile,{ ownerId: userId.id });
+        if(!profile) {
+            throw Error('Profile not found');
+        }
+        return profile;
     },
     createProfile: async (data: CreateProfileDto): Promise<Profile> => {
         const AppDataSource = await getDataSource();
         const profileRepo = AppDataSource.getRepository(Profile);
-        return await profileRepo.manager.save(Profile, data);
+        const profile =  await profileRepo.manager.save(Profile, data);
+        if(!profile) {
+            throw Error('Profile not found');
+        }
+        return profile;
     },
     updateProfile: async (updateProfileDto: UpdateProfileDto): Promise<Profile> => {
         const AppDataSource = await getDataSource();
         const profileRepo = AppDataSource.getRepository(Profile);
-        return await profileRepo.manager.save(Profile, updateProfileDto);
+        const profile = await profileRepo.manager.save(Profile, updateProfileDto);
+        if(!profile) {
+            throw Error('Profile not found');
+        }
+        return profile;
     },
     deleteProfile: async (userId: UserId): Promise<DeleteProfileResponseDto> => {
         const AppDataSource = await getDataSource();
         const profileRepo = AppDataSource.getRepository(Profile);
-        if(await profileRepo.manager.delete(Profile, { ownerId: userId.id })) {
-            return { success: true }
+        const profile = await profileRepo.manager.delete(Profile, { where: { ownerId: userId.id }});
+        if (!profile) {
+            throw Error('Profile not deleted');
         }
-        return { success: false };
+        return { success: true }
     }
 };
 

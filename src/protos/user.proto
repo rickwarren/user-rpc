@@ -32,11 +32,10 @@ message UserId {
 message UpdateUserDto {
     string id = 1;
     string email = 2;
-    string password = 3;
-    string role = 4;
-    ProfileDto profile = 5;
-    google.protobuf.Timestamp created_at = 6;
-    google.protobuf.Timestamp updated_at = 7;
+    string role = 3;
+    ProfileDto profile = 4;
+    google.protobuf.Timestamp created_at = 5;
+    google.protobuf.Timestamp updated_at = 6;
 }
 
 message CreateUserDto {
