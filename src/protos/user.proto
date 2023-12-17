@@ -1,13 +1,12 @@
 syntax = "proto3";
 
-import "google/protobuf/timestamp.proto";
-
 service UserProto {
   rpc getUsers(EmptyUser) returns (GetUsersResponseDto);
-  rpc getUser(UserId) returns (User);
-  rpc getUserByEmail(UserByEmailDto) returns (User);
-  rpc createUser(CreateUserDto) returns (User);
-  rpc updateUser(UpdateUserDto) returns (User);
+  rpc getUser(UserId) returns (UserDto);
+  rpc getUserByEmail(UserByEmailDto) returns (UserDto);
+  rpc getUserByUrlString(UserId) returns (UserDto);
+  rpc createUser(CreateUserDto) returns (UserDto);
+  rpc updateUser(UpdateUserDto) returns (UserDto);
   rpc deleteUser(UserId) returns (DeleteUserResponseDto);
 }
 
@@ -16,7 +15,7 @@ message UserByEmailDto {
 }
 
 message GetUsersResponseDto {
-  repeated User users = 1;
+  repeated UserDto users = 1;
 }
 
 message DeleteUserResponseDto {
@@ -33,9 +32,11 @@ message UpdateUserDto {
     string id = 1;
     string email = 2;
     string role = 3;
-    ProfileDto profile = 4;
-    google.protobuf.Timestamp created_at = 5;
-    google.protobuf.Timestamp updated_at = 6;
+    string permissions = 4;
+    string urlString = 5;
+    ProfileDto profile = 6;
+    string created_at = 7;
+    string updated_at = 8;
 }
 
 message CreateUserDto {
@@ -43,14 +44,16 @@ message CreateUserDto {
     string password = 2;
 }
 
-message User {
+message UserDto {
   string id = 1;
   string email = 2;
   string password = 3;
   string role = 4;
-  ProfileDto profile = 5;
-  google.protobuf.Timestamp created_at = 6;
-  google.protobuf.Timestamp updated_at = 7;
+  string permissions = 5;
+  string urlString = 6;
+  ProfileDto profile = 7;
+  string created_at = 8;
+  string updated_at = 9;
 }
 
 message ProfileDto {
@@ -73,6 +76,6 @@ message ProfileDto {
   string language = 17;
   string mobilePhone = 18;
   string visibility = 19;
-  google.protobuf.Timestamp createdAt = 20;
-  google.protobuf.Timestamp updatedAt = 21;
+  string createdAt = 20;
+  string updatedAt = 21;
 }

@@ -1,7 +1,5 @@
 syntax = "proto3";
 
-import "google/protobuf/timestamp.proto";
-
 service PermissionsProto {
   rpc getPermissions(PermissionId) returns (GetPermissionsResponseDto);
   rpc createPermission(CreatePermissionDto) returns (PermissionsDto);
@@ -29,6 +27,6 @@ message PermissionsDto {
   string id = 1;
   string userId = 2;
   string permission = 3;
-  google.protobuf.Timestamp created_at = 4;
-  google.protobuf.Timestamp updated_at = 5;
+  string created_at = 4;
+  string updated_at = 5;
 }

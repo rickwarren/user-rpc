@@ -7,7 +7,4 @@ export class CreatePermissionDto {
 
   @IsNotEmpty()
   permission: string;
-
-  createdAt: protoscript.Timestamp;
-  updatedAt: protoscript.Timestamp;
 }

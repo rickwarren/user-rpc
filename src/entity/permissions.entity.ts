@@ -6,7 +6,6 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 import { entity } from '@deepkit/type';
-import * as protoscript from "protoscript";
 
 @Entity()
 @entity.name('permissions')
@@ -20,9 +19,9 @@ export class Permissions {
   @Column()
   permission: string;
   
-  @CreateDateColumn({ type: 'timestamptz', default: () => 'CURRENT_TIMESTAMP(6)' })
-  createdAt: protoscript.Timestamp;
+  @CreateDateColumn({ type: 'timestamptz', default: () => 'NOW()' })
+  createdAt: string;
 
-  @UpdateDateColumn({ type: 'timestamptz', default: () => 'CURRENT_TIMESTAMP(6)', onUpdate: 'CURRENT_TIMESTAMP(6)' })
-  updatedAt: protoscript.Timestamp;
+  @UpdateDateColumn({ type: 'timestamptz', default: () => 'NOW()', onUpdate: 'NOW()' })
+  updatedAt: string;
 }
