@@ -7,7 +7,7 @@ import { CreateUserDto } from '../dto/create-user.dto.ts';
 import { UpdateUserDto } from '../dto/update-user.dto.ts';
 import { DeleteUserResponseDto } from '../dto/deleteUserResponse.dto.ts';
 import { UserByEmailDto } from '../dto/userByEmail.dto.ts';
-import { UserDto } from '../dto/user.dto.ts';
+import { UserDto } from '../protos/user.pb';
 
 const userProto: UserProto = {
     getUsers: async (EmptyUser): Promise<GetUsersResponseDto> => {
@@ -33,14 +33,22 @@ const userProto: UserProto = {
         delete user.password;
         return user;
     },
-    getUserByEmail: async (email: UserByEmailDto): Promise<User> => {
+    getUserByEmail: async (email: UserByEmailDto): Promise<UserDto> => {
         const AppDataSource = await getDataSource();
         const userRepo = AppDataSource.getRepository(User);
         const user = await userRepo.manager.findOneBy(User, { email: email.email });
         if(!user) {
             throw Error('User not found');
         }
-        console.log(user);
+        return user;
+    },
+    getUserByUrlString: async (userId: UserId): Promise<UserDto> => {
+        const AppDataSource = await getDataSource();
+        const userRepo = AppDataSource.getRepository(User);
+        const user = await userRepo.manager.findOneBy(User, { urlString: userId.id });
+        if(!user) {
+            throw Error('User not found');
+        }
         return user;
     },
     createUser: async (data: CreateUserDto): Promise<UserDto> => {

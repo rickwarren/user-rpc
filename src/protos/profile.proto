@@ -1,7 +1,5 @@
 syntax = "proto3";
 
-import "google/protobuf/timestamp.proto";
-
 service ProfileProto {
   rpc getProfiles(EmptyProfile) returns (GetProfileResponseDto);
   rpc getProfile(OwnerId) returns (Profile);
@@ -48,8 +46,8 @@ message UpdateProfileDto {
     string language = 17;
     string mobilePhone = 18;
     string visibility = 19;
-    google.protobuf.Timestamp createdAt = 20;
-    google.protobuf.Timestamp updatedAt = 21;
+    string createdAt = 20;
+    string updatedAt = 21;
   }
 
 message CreateProfileDto {
@@ -93,6 +91,6 @@ message Profile {
     string language = 17;
     string mobilePhone = 18;
     string visibility = 19;
-    google.protobuf.Timestamp createdAt = 20;
-    google.protobuf.Timestamp updatedAt = 21;
+    string createdAt = 20;
+    string updatedAt = 21;
   }

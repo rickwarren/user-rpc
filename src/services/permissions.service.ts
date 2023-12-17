@@ -1,9 +1,9 @@
-import { PermissionsProto, createPermissionsProto } from '../protos/permissions.pb.ts';
+import { PermissionsDto, PermissionsProto, createPermissionsProto } from '../protos/permissions.pb.ts';
 import { getDataSource } from '../data-source.ts';
 import { Permissions } from '../entity/permissions.entity.ts';
 import { PermissionId } from '../dto/permissionId.dto.ts';
 import { CreatePermissionDto } from '../dto/create-permission.dto.ts';
-import { PermissionsDto } from '../dto/permissions.dto.ts';
+
 import { GetPermissionsResponseDto } from '../dto/getPermissionsResponse.dto.ts';
 import { DeletePermissionResponseDto } from 'src/dto/deletePermissionResponse.dto.ts';
 

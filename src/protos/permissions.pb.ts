@@ -36,8 +36,8 @@ export interface PermissionsDto {
   id: string;
   userId: string;
   permission: string;
-  createdAt: protoscript.Timestamp;
-  updatedAt: protoscript.Timestamp;
+  createdAt: string;
+  updatedAt: string;
 }
 
 //========================================//
@@ -498,8 +498,8 @@ export const PermissionsDto = {
       id: "",
       userId: "",
       permission: "",
-      createdAt: protoscript.Timestamp.initialize(),
-      updatedAt: protoscript.Timestamp.initialize(),
+      createdAt: "",
+      updatedAt: "",
       ...msg,
     };
   },
@@ -521,18 +521,10 @@ export const PermissionsDto = {
       writer.writeString(3, msg.permission);
     }
     if (msg.createdAt) {
-      writer.writeMessage(
-        4,
-        msg.createdAt,
-        protoscript.Timestamp._writeMessage,
-      );
+      writer.writeString(4, msg.createdAt);
     }
     if (msg.updatedAt) {
-      writer.writeMessage(
-        5,
-        msg.updatedAt,
-        protoscript.Timestamp._writeMessage,
-      );
+      writer.writeString(5, msg.updatedAt);
     }
     return writer;
   },
@@ -560,11 +552,11 @@ export const PermissionsDto = {
           break;
         }
         case 4: {
-          reader.readMessage(msg.createdAt, protoscript.Timestamp._readMessage);
+          msg.createdAt = reader.readString();
           break;
         }
         case 5: {
-          reader.readMessage(msg.updatedAt, protoscript.Timestamp._readMessage);
+          msg.updatedAt = reader.readString();
           break;
         }
         default: {
@@ -848,8 +840,8 @@ export const PermissionsDtoJSON = {
       id: "",
       userId: "",
       permission: "",
-      createdAt: protoscript.TimestampJSON.initialize(),
-      updatedAt: protoscript.TimestampJSON.initialize(),
+      createdAt: "",
+      updatedAt: "",
       ...msg,
     };
   },
@@ -870,11 +862,11 @@ export const PermissionsDtoJSON = {
     if (msg.permission) {
       json["permission"] = msg.permission;
     }
-    if (msg.createdAt && msg.createdAt.seconds && msg.createdAt.nanos) {
-      json["createdAt"] = protoscript.serializeTimestamp(msg.createdAt);
+    if (msg.createdAt) {
+      json["createdAt"] = msg.createdAt;
     }
-    if (msg.updatedAt && msg.updatedAt.seconds && msg.updatedAt.nanos) {
-      json["updatedAt"] = protoscript.serializeTimestamp(msg.updatedAt);
+    if (msg.updatedAt) {
+      json["updatedAt"] = msg.updatedAt;
     }
     return json;
   },
@@ -897,11 +889,11 @@ export const PermissionsDtoJSON = {
     }
     const _createdAt_ = json["createdAt"] ?? json["created_at"];
     if (_createdAt_) {
-      msg.createdAt = protoscript.parseTimestamp(_createdAt_);
+      msg.createdAt = _createdAt_;
     }
     const _updatedAt_ = json["updatedAt"] ?? json["updated_at"];
     if (_updatedAt_) {
-      msg.updatedAt = protoscript.parseTimestamp(_updatedAt_);
+      msg.updatedAt = _updatedAt_;
     }
     return msg;
   },

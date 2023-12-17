@@ -1,5 +1,4 @@
 import { IsNotEmpty } from 'class-validator';
-import * as protoscript from "protoscript";
 
 export class PermissionsDto {
   @IsNotEmpty()
@@ -11,6 +10,6 @@ export class PermissionsDto {
   @IsNotEmpty()
   permission: string;
 
-  createdAt: protoscript.Timestamp;
-  updatedAt: protoscript.Timestamp;
+  createdAt: string;
+  updatedAt: string;
 }

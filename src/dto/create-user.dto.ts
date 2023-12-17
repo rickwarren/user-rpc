@@ -9,4 +9,6 @@ export class CreateUserDto {
   password: string;
 
   role: string;
+
+  permissions: string;
 }

@@ -53,8 +53,8 @@ export interface UpdateProfileDto {
   language: string;
   mobilePhone: string;
   visibility: string;
-  createdAt: protoscript.Timestamp;
-  updatedAt: protoscript.Timestamp;
+  createdAt: string;
+  updatedAt: string;
 }
 
 export interface CreateProfileDto {
@@ -98,8 +98,8 @@ export interface Profile {
   language: string;
   mobilePhone: string;
   visibility: string;
-  createdAt: protoscript.Timestamp;
-  updatedAt: protoscript.Timestamp;
+  createdAt: string;
+  updatedAt: string;
 }
 
 //========================================//
@@ -677,8 +677,8 @@ export const UpdateProfileDto = {
       language: "",
       mobilePhone: "",
       visibility: "",
-      createdAt: protoscript.Timestamp.initialize(),
-      updatedAt: protoscript.Timestamp.initialize(),
+      createdAt: "",
+      updatedAt: "",
       ...msg,
     };
   },
@@ -748,18 +748,10 @@ export const UpdateProfileDto = {
       writer.writeString(19, msg.visibility);
     }
     if (msg.createdAt) {
-      writer.writeMessage(
-        20,
-        msg.createdAt,
-        protoscript.Timestamp._writeMessage,
-      );
+      writer.writeString(20, msg.createdAt);
     }
     if (msg.updatedAt) {
-      writer.writeMessage(
-        21,
-        msg.updatedAt,
-        protoscript.Timestamp._writeMessage,
-      );
+      writer.writeString(21, msg.updatedAt);
     }
     return writer;
   },
@@ -851,11 +843,11 @@ export const UpdateProfileDto = {
           break;
         }
         case 20: {
-          reader.readMessage(msg.createdAt, protoscript.Timestamp._readMessage);
+          msg.createdAt = reader.readString();
           break;
         }
         case 21: {
-          reader.readMessage(msg.updatedAt, protoscript.Timestamp._readMessage);
+          msg.updatedAt = reader.readString();
           break;
         }
         default: {
@@ -1117,8 +1109,8 @@ export const Profile = {
       language: "",
       mobilePhone: "",
       visibility: "",
-      createdAt: protoscript.Timestamp.initialize(),
-      updatedAt: protoscript.Timestamp.initialize(),
+      createdAt: "",
+      updatedAt: "",
       ...msg,
     };
   },
@@ -1188,18 +1180,10 @@ export const Profile = {
       writer.writeString(19, msg.visibility);
     }
     if (msg.createdAt) {
-      writer.writeMessage(
-        20,
-        msg.createdAt,
-        protoscript.Timestamp._writeMessage,
-      );
+      writer.writeString(20, msg.createdAt);
     }
     if (msg.updatedAt) {
-      writer.writeMessage(
-        21,
-        msg.updatedAt,
-        protoscript.Timestamp._writeMessage,
-      );
+      writer.writeString(21, msg.updatedAt);
     }
     return writer;
   },
@@ -1291,11 +1275,11 @@ export const Profile = {
           break;
         }
         case 20: {
-          reader.readMessage(msg.createdAt, protoscript.Timestamp._readMessage);
+          msg.createdAt = reader.readString();
           break;
         }
         case 21: {
-          reader.readMessage(msg.updatedAt, protoscript.Timestamp._readMessage);
+          msg.updatedAt = reader.readString();
           break;
         }
         default: {
@@ -1616,8 +1600,8 @@ export const UpdateProfileDtoJSON = {
       language: "",
       mobilePhone: "",
       visibility: "",
-      createdAt: protoscript.TimestampJSON.initialize(),
-      updatedAt: protoscript.TimestampJSON.initialize(),
+      createdAt: "",
+      updatedAt: "",
       ...msg,
     };
   },
@@ -1686,11 +1670,11 @@ export const UpdateProfileDtoJSON = {
     if (msg.visibility) {
       json["visibility"] = msg.visibility;
     }
-    if (msg.createdAt && msg.createdAt.seconds && msg.createdAt.nanos) {
-      json["createdAt"] = protoscript.serializeTimestamp(msg.createdAt);
+    if (msg.createdAt) {
+      json["createdAt"] = msg.createdAt;
     }
-    if (msg.updatedAt && msg.updatedAt.seconds && msg.updatedAt.nanos) {
-      json["updatedAt"] = protoscript.serializeTimestamp(msg.updatedAt);
+    if (msg.updatedAt) {
+      json["updatedAt"] = msg.updatedAt;
     }
     return json;
   },
@@ -1777,11 +1761,11 @@ export const UpdateProfileDtoJSON = {
     }
     const _createdAt_ = json["createdAt"];
     if (_createdAt_) {
-      msg.createdAt = protoscript.parseTimestamp(_createdAt_);
+      msg.createdAt = _createdAt_;
     }
     const _updatedAt_ = json["updatedAt"];
     if (_updatedAt_) {
-      msg.updatedAt = protoscript.parseTimestamp(_updatedAt_);
+      msg.updatedAt = _updatedAt_;
     }
     return msg;
   },
@@ -2015,8 +1999,8 @@ export const ProfileJSON = {
       language: "",
       mobilePhone: "",
       visibility: "",
-      createdAt: protoscript.TimestampJSON.initialize(),
-      updatedAt: protoscript.TimestampJSON.initialize(),
+      createdAt: "",
+      updatedAt: "",
       ...msg,
     };
   },
@@ -2083,11 +2067,11 @@ export const ProfileJSON = {
     if (msg.visibility) {
       json["visibility"] = msg.visibility;
     }
-    if (msg.createdAt && msg.createdAt.seconds && msg.createdAt.nanos) {
-      json["createdAt"] = protoscript.serializeTimestamp(msg.createdAt);
+    if (msg.createdAt) {
+      json["createdAt"] = msg.createdAt;
     }
-    if (msg.updatedAt && msg.updatedAt.seconds && msg.updatedAt.nanos) {
-      json["updatedAt"] = protoscript.serializeTimestamp(msg.updatedAt);
+    if (msg.updatedAt) {
+      json["updatedAt"] = msg.updatedAt;
     }
     return json;
   },
@@ -2174,11 +2158,11 @@ export const ProfileJSON = {
     }
     const _createdAt_ = json["createdAt"];
     if (_createdAt_) {
-      msg.createdAt = protoscript.parseTimestamp(_createdAt_);
+      msg.createdAt = _createdAt_;
     }
     const _updatedAt_ = json["updatedAt"];
     if (_updatedAt_) {
-      msg.updatedAt = protoscript.parseTimestamp(_updatedAt_);
+      msg.updatedAt = _updatedAt_;
     }
     return msg;
   },

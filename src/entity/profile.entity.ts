@@ -5,7 +5,6 @@ import {
   UpdateDateColumn,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-import * as protoscript from "protoscript";
 
 @Entity()
 export class Profile {
@@ -66,9 +65,9 @@ export class Profile {
   @Column({ nullable: true })
   visibility: string;
 
-  @CreateDateColumn({ type: 'timestamptz', default: () => 'CURRENT_TIMESTAMP(6)' })
-  createdAt: protoscript.Timestamp;
+  @CreateDateColumn({ type: 'timestamptz', default: () => 'NOW()' })
+  createdAt: string;
 
-  @UpdateDateColumn({ type: 'timestamptz', default: () => 'CURRENT_TIMESTAMP(6)', onUpdate: 'CURRENT_TIMESTAMP(6)' })
-  updatedAt: protoscript.Timestamp;
+  @UpdateDateColumn({ type: 'timestamptz', default: () => 'NOW()', onUpdate: 'NOW()' })
+  updatedAt: string;
 }

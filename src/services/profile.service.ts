@@ -1,11 +1,8 @@
-import { ProfileProto, createProfileProto } from '../protos/profile.pb.ts';
+import { CreateProfileDto, DeleteProfileResponseDto, GetProfileResponseDto, ProfileProto, UpdateProfileDto, createProfileProto } from '../protos/profile.pb.ts';
 import { getDataSource } from '../data-source.ts';
 import { Profile } from '../entity/profile.entity.ts';
-import { GetProfileResponseDto } from '../dto/getProfileResponse.dto.ts';
-import { UserId } from '../dto/userRequest.dto.ts';
-import { DeleteProfileResponseDto } from '../dto/deleteProfileResponse.dto.ts';
-import { CreateProfileDto } from '../dto/create-profile.dto.ts';
-import { UpdateProfileDto } from '../dto/update-profile.dto.ts';
+import { ProfileDto, UserId } from 'src/protos/user.pb.ts';
+
 
 const profileProto: ProfileProto = {
     getProfiles: async (EmptyProfile): Promise<GetProfileResponseDto> => {
@@ -17,7 +14,7 @@ const profileProto: ProfileProto = {
         }
         return { profiles: profiles };
     },
-    getProfile: async (userId: UserId): Promise<Profile> => {
+    getProfile: async (userId: UserId): Promise<ProfileDto> => {
         const AppDataSource = await getDataSource();
         const profileRepo = AppDataSource.getRepository(Profile);
         const profile = await profileRepo.manager.findOneBy(Profile,{ ownerId: userId.id });
@@ -26,23 +23,23 @@ const profileProto: ProfileProto = {
         }
         return profile;
     },
-    createProfile: async (data: CreateProfileDto): Promise<Profile> => {
+    createProfile: async (data: CreateProfileDto): Promise<ProfileDto> => {
         const AppDataSource = await getDataSource();
         const profileRepo = AppDataSource.getRepository(Profile);
         const profile =  await profileRepo.manager.save(Profile, data);
         if(!profile) {
-            throw Error('Profile not found');
+            throw Error('Profile not created');
         }
         return profile;
     },
-    updateProfile: async (updateProfileDto: UpdateProfileDto): Promise<Profile> => {
+    updateProfile: async (updateProfileDto: UpdateProfileDto): Promise<ProfileDto> => {
         const AppDataSource = await getDataSource();
         const profileRepo = AppDataSource.getRepository(Profile);
-        const profile = await profileRepo.manager.save(Profile, updateProfileDto);
+        const profile = await profileRepo.manager.update(Profile, updateProfileDto.id, updateProfileDto);
         if(!profile) {
-            throw Error('Profile not found');
+            throw Error('Profile not saved');
         }
-        return profile;
+        return profile.raw[0];
     },
     deleteProfile: async (userId: UserId): Promise<DeleteProfileResponseDto> => {
         const AppDataSource = await getDataSource();
