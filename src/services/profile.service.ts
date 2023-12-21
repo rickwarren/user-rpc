@@ -26,7 +26,8 @@ const profileProto: ProfileProto = {
     createProfile: async (data: CreateProfileDto): Promise<ProfileDto> => {
         const AppDataSource = await getDataSource();
         const profileRepo = AppDataSource.getRepository(Profile);
-        const profile =  await profileRepo.manager.save(Profile, data);
+        const newProfile = await profileRepo.manager.create(Profile, data);
+        const profile =  await profileRepo.manager.save(Profile, newProfile);
         if(!profile) {
             throw Error('Profile not created');
         }
@@ -35,11 +36,11 @@ const profileProto: ProfileProto = {
     updateProfile: async (updateProfileDto: UpdateProfileDto): Promise<ProfileDto> => {
         const AppDataSource = await getDataSource();
         const profileRepo = AppDataSource.getRepository(Profile);
-        const profile = await profileRepo.manager.update(Profile, updateProfileDto.id, updateProfileDto);
+        const profile = await profileRepo.manager.update(Profile, { id: updateProfileDto.id}, updateProfileDto);
         if(!profile) {
             throw Error('Profile not saved');
         }
-        return profile.raw[0];
+        return profile.raw;
     },
     deleteProfile: async (userId: UserId): Promise<DeleteProfileResponseDto> => {
         const AppDataSource = await getDataSource();

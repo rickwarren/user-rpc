@@ -4,10 +4,14 @@ service UserProto {
   rpc getUsers(EmptyUser) returns (GetUsersResponseDto);
   rpc getUser(UserId) returns (UserDto);
   rpc getUserByEmail(UserByEmailDto) returns (UserDto);
-  rpc getUserByUrlString(UserId) returns (UserDto);
+  rpc getUserByUrlString(UserUrlString) returns (UserDto);
   rpc createUser(CreateUserDto) returns (UserDto);
   rpc updateUser(UpdateUserDto) returns (UserDto);
   rpc deleteUser(UserId) returns (DeleteUserResponseDto);
+}
+
+message UserUrlString {
+  string urlString = 1;
 }
 
 message UserByEmailDto {

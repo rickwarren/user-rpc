@@ -1,23 +1,21 @@
-import {
-  Column,
-  CreateDateColumn,
-  Entity,
-  PrimaryGeneratedColumn,
-  UpdateDateColumn,
-} from 'typeorm';
-import { entity } from '@deepkit/type';
 
+import { Column, CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
+import { Photo } from './photos.entity';
+ 
 @Entity()
-export class Permissions {
+export class LocalFile {
   @PrimaryGeneratedColumn('uuid')
   id: string;
-
+ 
   @Column()
-  userId: string;
-
+  filename: string;
+ 
   @Column()
-  permission: string;
-  
+  path: string;
+ 
+  @Column()
+  mimetype: string;
+
   @CreateDateColumn({ type: 'timestamptz', default: () => 'NOW()' })
   createdAt: string;
 

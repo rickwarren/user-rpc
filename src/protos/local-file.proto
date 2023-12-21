@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+service LocalFileProto {
+  rpc getLocalFile(FileId) returns (LocalFileDto);
+  rpc createLocalFile(CreateLocalFileDto) returns (LocalFileDto);
+  rpc deleteLocalFile(FileId) returns (DeleteLocalFileResponseDto);
+}
+
+message DeleteLocalFileResponseDto {
+  bool success = 1;
+}
+
+message FileId {
+  string id = 1;
+}
+
+message CreateLocalFileDto {
+    string filename = 1;
+    string path = 2;
+    string mimetype = 3;
+}
+
+message LocalFileDto {
+  string id = 1;
+  string filename = 2;
+  string path = 3;
+  string mimetype = 4;
+  string created_at = 5;
+  string updated_at = 6;
+}

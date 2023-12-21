@@ -31,7 +31,7 @@ export class User {
   @Column({ nullable: true })
   role: string;
 
-  @OneToOne(() => Profile)
+  @OneToOne(() => Profile, (profile) => profile.ownerId, { eager: true })
   @JoinColumn()
   profile: Profile;
 
