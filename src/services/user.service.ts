@@ -8,6 +8,7 @@ import { UpdateUserDto } from '../dto/update-user.dto.ts';
 import { DeleteUserResponseDto } from '../dto/deleteUserResponse.dto.ts';
 import { UserByEmailDto } from '../dto/userByEmail.dto.ts';
 import { UserDto } from '../protos/user.pb';
+import { UserUrlString } from 'src/dto/userUrlString.dto.ts';
 
 const userProto: UserProto = {
     getUsers: async (EmptyUser): Promise<GetUsersResponseDto> => {
@@ -42,10 +43,10 @@ const userProto: UserProto = {
         }
         return user;
     },
-    getUserByUrlString: async (userId: UserId): Promise<UserDto> => {
+    getUserByUrlString: async (userUrlString: UserUrlString): Promise<UserDto> => {
         const AppDataSource = await getDataSource();
         const userRepo = AppDataSource.getRepository(User);
-        const user = await userRepo.manager.findOneBy(User, { urlString: userId.id });
+        const user = await userRepo.manager.findOneBy(User, { urlString: userUrlString.urlString });
         if(!user) {
             throw Error('User not found');
         }

@@ -15,6 +15,10 @@ import type { ClientConfiguration } from "twirpscript";
 //                 Types                  //
 //========================================//
 
+export interface UserUrlString {
+  urlString: string;
+}
+
 export interface UserByEmailDto {
   email: string;
 }
@@ -126,12 +130,12 @@ export async function getUserByEmail(
 }
 
 export async function getUserByUrlString(
-  userId: UserId,
+  userUrlString: UserUrlString,
   config?: ClientConfiguration,
 ): Promise<UserDto> {
   const response = await PBrequest(
     "/UserProto/getUserByUrlString",
-    UserId.encode(userId),
+    UserUrlString.encode(userUrlString),
     config,
   );
   return UserDto.decode(response);
@@ -214,12 +218,12 @@ export async function getUserByEmailJSON(
 }
 
 export async function getUserByUrlStringJSON(
-  userId: UserId,
+  userUrlString: UserUrlString,
   config?: ClientConfiguration,
 ): Promise<UserDto> {
   const response = await JSONrequest(
     "/UserProto/getUserByUrlString",
-    UserIdJSON.encode(userId),
+    UserUrlStringJSON.encode(userUrlString),
     config,
   );
   return UserDtoJSON.decode(response);
@@ -276,7 +280,7 @@ export interface UserProto<Context = unknown> {
     context: Context,
   ) => Promise<UserDto> | UserDto;
   getUserByUrlString: (
-    userId: UserId,
+    userUrlString: UserUrlString,
     context: Context,
   ) => Promise<UserDto> | UserDto;
   createUser: (
@@ -321,7 +325,7 @@ export function createUserProto<Context>(service: UserProto<Context>) {
       getUserByUrlString: {
         name: "getUserByUrlString",
         handler: service.getUserByUrlString,
-        input: { protobuf: UserId, json: UserIdJSON },
+        input: { protobuf: UserUrlString, json: UserUrlStringJSON },
         output: { protobuf: UserDto, json: UserDtoJSON },
       },
       createUser: {
@@ -352,6 +356,74 @@ export function createUserProto<Context>(service: UserProto<Context>) {
 //========================================//
 //        Protobuf Encode / Decode        //
 //========================================//
+
+export const UserUrlString = {
+  /**
+   * Serializes UserUrlString to protobuf.
+   */
+  encode: function (msg: PartialDeep<UserUrlString>): Uint8Array {
+    return UserUrlString._writeMessage(
+      msg,
+      new protoscript.BinaryWriter(),
+    ).getResultBuffer();
+  },
+
+  /**
+   * Deserializes UserUrlString from protobuf.
+   */
+  decode: function (bytes: ByteSource): UserUrlString {
+    return UserUrlString._readMessage(
+      UserUrlString.initialize(),
+      new protoscript.BinaryReader(bytes),
+    );
+  },
+
+  /**
+   * Initializes UserUrlString with all fields set to their default value.
+   */
+  initialize: function (msg?: Partial<UserUrlString>): UserUrlString {
+    return {
+      urlString: "",
+      ...msg,
+    };
+  },
+
+  /**
+   * @private
+   */
+  _writeMessage: function (
+    msg: PartialDeep<UserUrlString>,
+    writer: protoscript.BinaryWriter,
+  ): protoscript.BinaryWriter {
+    if (msg.urlString) {
+      writer.writeString(1, msg.urlString);
+    }
+    return writer;
+  },
+
+  /**
+   * @private
+   */
+  _readMessage: function (
+    msg: UserUrlString,
+    reader: protoscript.BinaryReader,
+  ): UserUrlString {
+    while (reader.nextField()) {
+      const field = reader.getFieldNumber();
+      switch (field) {
+        case 1: {
+          msg.urlString = reader.readString();
+          break;
+        }
+        default: {
+          reader.skipField();
+          break;
+        }
+      }
+    }
+    return msg;
+  },
+};
 
 export const UserByEmailDto = {
   /**
@@ -1239,6 +1311,59 @@ export const ProfileDto = {
 //========================================//
 //          JSON Encode / Decode          //
 //========================================//
+
+export const UserUrlStringJSON = {
+  /**
+   * Serializes UserUrlString to JSON.
+   */
+  encode: function (msg: PartialDeep<UserUrlString>): string {
+    return JSON.stringify(UserUrlStringJSON._writeMessage(msg));
+  },
+
+  /**
+   * Deserializes UserUrlString from JSON.
+   */
+  decode: function (json: string): UserUrlString {
+    return UserUrlStringJSON._readMessage(
+      UserUrlStringJSON.initialize(),
+      JSON.parse(json),
+    );
+  },
+
+  /**
+   * Initializes UserUrlString with all fields set to their default value.
+   */
+  initialize: function (msg?: Partial<UserUrlString>): UserUrlString {
+    return {
+      urlString: "",
+      ...msg,
+    };
+  },
+
+  /**
+   * @private
+   */
+  _writeMessage: function (
+    msg: PartialDeep<UserUrlString>,
+  ): Record<string, unknown> {
+    const json: Record<string, unknown> = {};
+    if (msg.urlString) {
+      json["urlString"] = msg.urlString;
+    }
+    return json;
+  },
+
+  /**
+   * @private
+   */
+  _readMessage: function (msg: UserUrlString, json: any): UserUrlString {
+    const _urlString_ = json["urlString"];
+    if (_urlString_) {
+      msg.urlString = _urlString_;
+    }
+    return msg;
+  },
+};
 
 export const UserByEmailDtoJSON = {
   /**

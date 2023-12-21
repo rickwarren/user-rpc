@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+service PhotoProto {
+  rpc getPhotos(PhotoId) returns (PhotosResponseDto);
+  rpc getPhoto(PhotoId) returns (PhotoDto);
+  rpc createPhoto(CreatePhotoDto) returns (PhotoDto);
+  rpc deletePhoto(PhotoId) returns (DeletePhotoResponseDto);
+}
+
+message PhotosResponseDto {
+  repeated PhotoDto photos = 1;
+}
+
+message DeletePhotoResponseDto {
+  bool success = 1;
+}
+
+message PhotoId {
+  string id = 1;
+}
+
+message CreatePhotoDto {
+    string userId = 1;
+    string localFileId = 2;
+}
+
+message PhotoDto {
+  string id = 1;
+  string userId = 2;
+  string localFileId = 3;
+}
