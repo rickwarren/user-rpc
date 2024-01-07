@@ -5,10 +5,11 @@ import { profileProtoHandler } from "./services/profile.service.ts";
 import { permissionsProtoHandler } from "./services/permissions.service.ts";
 import { localFileProtoHandler } from "./services/local-file.service.ts";
 import { photoProtoHandler } from "./services/photo.service.ts";
+import { videoProtoHandler } from "./services/video.service.ts";
 
 const PORT = 8080;
 
-const app = createTwirpServer([userProtoHandler, profileProtoHandler, permissionsProtoHandler, localFileProtoHandler, photoProtoHandler]);
+const app = createTwirpServer([userProtoHandler, profileProtoHandler, permissionsProtoHandler, localFileProtoHandler, photoProtoHandler, videoProtoHandler]);
 
 app.use(async (req, _ctx, next) => {
   if (req.method === "OPTIONS") {

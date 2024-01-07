@@ -1,6 +1,6 @@
 
 import { Column, CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
-import { Photo } from './photos.entity';
+import { Photo } from './photo.entity';
  
 @Entity()
 export class LocalFile {

@@ -2,7 +2,7 @@ import { PhotoProto, createPhotoProto } from '../protos/photo.pb.ts';
 import { getDataSource } from '../data-source.ts';
 import { PhotoId } from '../dto/photoId.dto.ts';
 import { PhotosResponseDto } from '../dto/photosResponse.dto.ts';
-import { Photo } from '../entity/photos.entity.ts';
+import { Photo } from '../entity/photo.entity.ts';
 import { PhotoDto } from '../dto/photo.dto.ts';
 import { CreatePhotoDto } from '../dto/create-photo.dto.ts';
 import { DeletePhotoResponseDto } from '../dto/DeletePhotoResponse.dto.ts';
