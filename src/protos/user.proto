@@ -3,6 +3,7 @@ syntax = "proto3";
 service UserProto {
   rpc getUsers(EmptyUser) returns (GetUsersResponseDto);
   rpc getUser(UserId) returns (UserDto);
+  rpc getUserBySlug(UserId) returns (UserDto);
   rpc getUserByEmail(UserByEmailDto) returns (UserDto);
   rpc getUserByUrlString(UserUrlString) returns (UserDto);
   rpc createUser(CreateUserDto) returns (UserDto);

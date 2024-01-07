@@ -117,6 +117,18 @@ export async function getUser(
   return UserDto.decode(response);
 }
 
+export async function getUserBySlug(
+  userId: UserId,
+  config?: ClientConfiguration,
+): Promise<UserDto> {
+  const response = await PBrequest(
+    "/UserProto/getUserBySlug",
+    UserId.encode(userId),
+    config,
+  );
+  return UserDto.decode(response);
+}
+
 export async function getUserByEmail(
   userByEmailDto: UserByEmailDto,
   config?: ClientConfiguration,
@@ -205,6 +217,18 @@ export async function getUserJSON(
   return UserDtoJSON.decode(response);
 }
 
+export async function getUserBySlugJSON(
+  userId: UserId,
+  config?: ClientConfiguration,
+): Promise<UserDto> {
+  const response = await JSONrequest(
+    "/UserProto/getUserBySlug",
+    UserIdJSON.encode(userId),
+    config,
+  );
+  return UserDtoJSON.decode(response);
+}
+
 export async function getUserByEmailJSON(
   userByEmailDto: UserByEmailDto,
   config?: ClientConfiguration,
@@ -275,6 +299,10 @@ export interface UserProto<Context = unknown> {
     context: Context,
   ) => Promise<GetUsersResponseDto> | GetUsersResponseDto;
   getUser: (userId: UserId, context: Context) => Promise<UserDto> | UserDto;
+  getUserBySlug: (
+    userId: UserId,
+    context: Context,
+  ) => Promise<UserDto> | UserDto;
   getUserByEmail: (
     userByEmailDto: UserByEmailDto,
     context: Context,
@@ -313,6 +341,12 @@ export function createUserProto<Context>(service: UserProto<Context>) {
       getUser: {
         name: "getUser",
         handler: service.getUser,
+        input: { protobuf: UserId, json: UserIdJSON },
+        output: { protobuf: UserDto, json: UserDtoJSON },
+      },
+      getUserBySlug: {
+        name: "getUserBySlug",
+        handler: service.getUserBySlug,
         input: { protobuf: UserId, json: UserIdJSON },
         output: { protobuf: UserDto, json: UserDtoJSON },
       },

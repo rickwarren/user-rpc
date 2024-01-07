@@ -34,6 +34,16 @@ const userProto: UserProto = {
         delete user.password;
         return user;
     },
+    getUserBySlug: async (slugId: UserId): Promise<UserDto> => {
+        const AppDataSource = await getDataSource();
+        const userRepo = AppDataSource.getRepository(User);
+        const user = await userRepo.manager.findOneBy(User, { urlString: slugId.id });
+        if(!user) {
+            throw Error('User not found');
+        }
+        delete user.password;
+        return user;
+    },
     getUserByEmail: async (email: UserByEmailDto): Promise<UserDto> => {
         const AppDataSource = await getDataSource();
         const userRepo = AppDataSource.getRepository(User);

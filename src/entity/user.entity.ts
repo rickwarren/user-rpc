@@ -4,7 +4,6 @@ import {
   CreateDateColumn,
   Entity,
   JoinColumn,
-  OneToMany,
   OneToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
@@ -15,7 +14,6 @@ import { Profile } from './profile.entity.ts';
 import { entity } from '@deepkit/type';
 
 @Entity()
-@entity.name('user')
 export class User {
   @PrimaryGeneratedColumn('uuid')
   id: string;

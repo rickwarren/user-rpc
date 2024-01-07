@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+service VideoProto {
+  rpc getVideos(VideoId) returns (VideosResponseDto);
+  rpc getVideo(VideoId) returns (VideoDto);
+  rpc createVideo(CreateVideoDto) returns (VideoDto);
+  rpc deleteVideo(VideoId) returns (DeleteVideoResponseDto);
+}
+
+message VideosResponseDto {
+  repeated VideoDto videos = 1;
+}
+
+message DeleteVideoResponseDto {
+  bool success = 1;
+}
+
+message VideoId {
+  string id = 1;
+}
+
+message CreateVideoDto {
+    string userId = 1;
+    string localFileId = 2;
+}
+
+message VideoDto {
+  string id = 1;
+  string userId = 2;
+  string localFileId = 3;
+}
