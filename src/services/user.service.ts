@@ -9,6 +9,7 @@ import { DeleteUserResponseDto } from '../dto/deleteUserResponse.dto.ts';
 import { UserByEmailDto } from '../dto/userByEmail.dto.ts';
 import { UserDto } from '../protos/user.pb';
 import { UserUrlString } from 'src/dto/userUrlString.dto.ts';
+import { session } from '../neo4j.ts';
 
 const userProto: UserProto = {
     getUsers: async (EmptyUser): Promise<GetUsersResponseDto> => {
@@ -70,6 +71,10 @@ const userProto: UserProto = {
             throw Error('unable to create user');
         }
         delete user.password;
+        const res = await session.executeWrite(tx => tx.run(`
+            CREATE (u:User {id: $id, email: $email})`, 
+            { id: user.id, email: user.email }
+        ))
         return user;
     },
     updateUser: async (data: UpdateUserDto): Promise<UserDto> => {
@@ -93,6 +98,11 @@ const userProto: UserProto = {
         if(!result) {
             throw Error('Unable to delete user');
         }
+        const res = await session.executeWrite(tx => tx.run(`
+            MATCH (u:User {id: $id})
+            DETACH DELETE u`, 
+            { id: userId.id }
+        ))
         return { success: true };
     }
   };
