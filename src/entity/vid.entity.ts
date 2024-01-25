@@ -6,7 +6,7 @@ import {
 } from 'typeorm';
 
 @Entity()
-export class Video {
+export class Vid {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
@@ -15,4 +15,7 @@ export class Video {
  
   @Column()
   localFileId: string;
+
+  @Column()
+  views: number;
 }

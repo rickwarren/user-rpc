@@ -1,0 +1,41 @@
+syntax = "proto3";
+
+service VidProto {
+  rpc getVids(VidId) returns (VidsResponseDto);
+  rpc getVid(VidId) returns (VidDto);
+  rpc createVid(CreateVidDto) returns (VidDto);
+  rpc updateVid(UpdateVidDto) returns (VidDto);
+  rpc deleteVid(VidId) returns (DeleteVidResponseDto);
+}
+
+message VidsResponseDto {
+  repeated VidDto vids = 1;
+}
+
+message DeleteVidResponseDto {
+  bool success = 1;
+}
+
+message VidId {
+  string id = 1;
+}
+
+message CreateVidDto {
+    string userId = 1;
+    string localFileId = 2;
+    int32 views = 3;
+}
+
+message UpdateVidDto {
+  string id = 1;
+  string userId = 2;
+  string localFileId = 3;
+  int32 views = 4;
+}
+
+message VidDto {
+  string id = 1;
+  string userId = 2;
+  string localFileId = 3;
+  int32 views = 4;
+}
