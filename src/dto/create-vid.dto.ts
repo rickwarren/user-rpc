@@ -1,5 +1,4 @@
-export class VideoDto {
-    id: string;
+export class CreateVidDto {
     userId: string;
     localFileId: string;
 }
